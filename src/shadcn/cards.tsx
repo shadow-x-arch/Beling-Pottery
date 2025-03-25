@@ -131,7 +131,7 @@ function App() {
                 required
                 className="w-full px-3 py-2 border rounded"
               />
-              <label>Progress %</label>
+              <label>Progress</label>
               <input
                 type="number"
                 name="progress"

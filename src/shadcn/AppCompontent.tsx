@@ -1,7 +1,7 @@
-import React from "react";
+
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Search, Settings, ChevronUp, ChevronDown, LayoutDashboard, CheckSquare, FileText, BarChart2, File, Folder } from "lucide-react";
+import { Search, Settings, LayoutDashboard, CheckSquare, FileText, BarChart2, File, Folder } from "lucide-react";
 
 const AppCompontent = () => {
   return (
