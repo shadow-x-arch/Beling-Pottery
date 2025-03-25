@@ -79,6 +79,16 @@ export default {
           'accordion-up': 'accordion-up 0.2s ease-out',
         },
       },
+      module,exports : {
+        future: {
+          hoverOnlyWhenSupported: true,
+        },
+        theme: {
+          extend: {},
+        },
+        plugins: [],
+      },
+      
     },
     plugins: [require('tailwindcss-animate')],
   };
