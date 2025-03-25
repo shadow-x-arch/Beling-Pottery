@@ -1,76 +1,80 @@
-import React, { useState } from 'react';
-import { ToDoCard, OnProgressCard, InReviewCard, CompletedCard } from './TaskCards';
-import TopCardTodo from './TopCardTodo.tsx';
-import TopCardReview from './TopCardReview.tsx';
-import TopCardProgress from './TopCardProgress.tsx';
-import TopCardComplete from './TopCardComplete.tsx';
+import React, { useState } from "react";
+import {
+  ToDoCard,
+  OnProgressCard,
+  InReviewCard,
+  CompletedCard,
+} from "./TaskCards";
+import TopCardTodo from "./TopCardTodo.tsx";
+import TopCardReview from "./TopCardReview.tsx";
+import TopCardProgress from "./TopCardProgress.tsx";
+import TopCardComplete from "./TopCardComplete.tsx";
+
 interface TaskInput {
   id: string;
   title: string;
   description: string;
-  priority: 'High' | 'Low';
+  priority: "High" | "Low";
   type: string;
   progress: number;
   comments: number;
   links: number;
   assignees: string[];
   image: string;
-  status: 'to-do' | 'on progress' | 'in review' | 'completed';
+  status: "to-do" | "on progress" | "in review" | "completed";
 }
 
 function App() {
   const [tasks, setTasks] = useState<TaskInput[]>([]);
   const [formData, setFormData] = useState<TaskInput>({
-    id: '',
-    title: '',
-    description: '',
-    priority: 'Low',
-    type: '',
+    id: "",
+    title: "",
+    description: "",
+    priority: "Low",
+    type: "",
     progress: 0,
     comments: 0,
     links: 0,
     assignees: [],
-    image: '',
-    status: 'to-do',
+    image: "",
+    status: "to-do",
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
 
- 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: name === 'progress' ? parseInt(value) : value, 
+      [name]: ["progress", "comments", "links"].includes(name) ? parseInt(value) || 0 : value,
     }));
   };
 
-  // Handle form submission
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const normalizedTask = { ...formData, status: formData.status.toLowerCase() }; 
-    setTasks((prev) => [...prev, normalizedTask]);
+    setTasks((prev) => [...prev, formData]);
     setFormData({
-      id: '',
-      title: '',
-      description: '',
-      priority: 'Low',
-      type: '',
+      id: "",
+      title: "",
+      description: "",
+      priority: "Low",
+      type: "",
       progress: 0,
       comments: 0,
       links: 0,
       assignees: [],
-      image: '',
-      status: 'to-do',
-    }); // Reset form
+      image: "",
+      status: "to-do",
+    });
     setIsModalOpen(false);
   };
 
-  // Filter tasks by category
-  const filterTasksByStatus = (status: string) =>
+  const filterTasksByStatus = (status: TaskInput["status"]) =>
     tasks.filter((task) => task.status === status);
 
   return (
-    <div className="bg-gray-200 p-5 w-280 mb-2">
+    <div className="bg-gray-200 p-5 w-full mb-2">
       {/* Button to Open Modal */}
       <button
         onClick={() => setIsModalOpen(true)}
@@ -122,7 +126,6 @@ function App() {
                 <option value="Low">Low</option>
               </select>
               <input
-                id="id"
                 type="text"
                 name="type"
                 placeholder="Task Type"
@@ -143,7 +146,7 @@ function App() {
                 required
                 className="w-full px-3 py-2 border rounded"
               />
-              <label>NUmber message</label>
+              <label>Number of Comments</label>
               <input
                 type="number"
                 name="comments"
@@ -153,7 +156,7 @@ function App() {
                 required
                 className="w-full px-3 py-2 border rounded"
               />
-              <label>Number comments</label>
+              <label>Number of Links</label>
               <input
                 type="number"
                 name="links"
@@ -185,10 +188,7 @@ function App() {
                 <option value="completed">Completed</option>
               </select>
               <div className="flex justify-between">
-                <button
-                  type="submit"
-                  className="bg-blue-500 text-white py-2 px-4 rounded"
-                >
+                <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded">
                   Create Task
                 </button>
                 <button
@@ -207,26 +207,26 @@ function App() {
       {/* Display Tasks by Category */}
       <div className="flex gap-4 overflow-x-auto">
         <div className="bg-white p-4 rounded shadow w-1/4">
-          <TopCardTodo/>
-          {filterTasksByStatus('to-do').map((task) => (
+          <TopCardTodo />
+          {filterTasksByStatus("to-do").map((task) => (
             <ToDoCard key={task.id} {...task} />
           ))}
         </div>
         <div className="bg-white p-4 rounded shadow w-1/4">
-        <TopCardProgress/>
-          {filterTasksByStatus('on progress').map((task) => (
+          <TopCardProgress />
+          {filterTasksByStatus("on progress").map((task) => (
             <OnProgressCard key={task.id} {...task} />
           ))}
         </div>
         <div className="bg-white p-4 rounded shadow w-1/4">
-        <TopCardReview/>
-          {filterTasksByStatus('in review').map((task) => (
+          <TopCardReview />
+          {filterTasksByStatus("in review").map((task) => (
             <InReviewCard key={task.id} {...task} />
           ))}
         </div>
         <div className="bg-white p-4 rounded shadow w-1/4">
-        <TopCardComplete/>
-          {filterTasksByStatus('completed').map((task) => (
+          <TopCardComplete />
+          {filterTasksByStatus("completed").map((task) => (
             <CompletedCard key={task.id} {...task} />
           ))}
         </div>

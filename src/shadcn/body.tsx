@@ -39,7 +39,7 @@ function ResponsiveDrawer() {
           isExpanded ? 'ml-[5%]' : 'ml-[14%]'
         } lg:ml-0`}
       >
-        <div className="max-w-[2000px] mx-auto rounded-md">
+        <div className="max-w-[1110px] mx-auto rounded-md">
           {/* Top Navigation */}
           <div className="bg-gray-50 rounded-md">
             <nav className="px-4 py-2 border-b bg-white border-gray-400 rounded-md">

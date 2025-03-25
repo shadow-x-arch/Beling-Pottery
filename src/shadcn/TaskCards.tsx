@@ -31,7 +31,7 @@ export function CompletedCard(props: TaskCardProps) {
 
 function BaseCard({ id, title, description, priority, type, progress, comments, links, assignees, image, bgClass }: TaskCardProps & { bgClass: string }) {
   return (
-    <div className={`rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow  ${bgClass}`}>
+    <div className={`rounded-lg p-4 mt-2 shadow-sm hover:shadow-md transition-shadow  ${bgClass}`}>
       <div className="flex justify-between items-start mb-2">
         <div className="flex items-center gap-1">
           <span className={`text-xs px-2 py-0.5 rounded ${priority === 'High' ? 'bg-red-50 text-red-600' : 'bg-gray-50 text-gray-600'}`}>
